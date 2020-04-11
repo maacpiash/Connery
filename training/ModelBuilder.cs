@@ -13,35 +13,6 @@ namespace Connery.Training
 {
     public static class ModelBuilder
     {
-        private static string TRAIN_DATA_FILEPATH = @"C:\Users\maacp\AppData\Local\Temp\c3609dbf-bb73-48f2-a0f6-8e61b9598d4d.tsv";
-        private static string MODEL_FILEPATH = @"C:\Users\maacp\AppData\Local\Temp\MLVSTools\ConneryML\ConneryML.Model\MLModel.zip";
-        // Create MLContext to be shared across the model creation workflow objects 
-        // Set a random seed for repeatable/deterministic results across multiple trainings.
-        private static MLContext mlContext = new MLContext(seed: 1);
-
-        public static void CreateModel()
-        {
-            // Load Data
-            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<ModelInput>(
-                                            path: TRAIN_DATA_FILEPATH,
-                                            hasHeader: true,
-                                            separatorChar: '\t',
-                                            allowQuoting: true,
-                                            allowSparse: false);
-
-            // Build training pipeline
-            IEstimator<ITransformer> trainingPipeline = BuildTrainingPipeline(mlContext);
-
-            // Evaluate quality of Model
-            Evaluate(mlContext, trainingDataView, trainingPipeline);
-
-            // Train Model
-            ITransformer mlModel = TrainModel(mlContext, trainingDataView, trainingPipeline);
-
-            // Save model
-            SaveModel(mlContext, mlModel, MODEL_FILEPATH, trainingDataView.Schema);
-        }
-
         public static IEstimator<ITransformer> BuildTrainingPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations 
@@ -67,7 +38,7 @@ namespace Connery.Training
             return model;
         }
 
-        private static void Evaluate(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
+        public static void Evaluate(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
         {
             // Cross-Validate with single dataset (since we don't have two datasets, one for training and for evaluate)
             // in order to evaluate and get the model's accuracy metrics
@@ -76,12 +47,13 @@ namespace Connery.Training
             PrintMulticlassClassificationFoldsAverageMetrics(crossValidationResults);
         }
 
-        private static void SaveModel(MLContext mlContext, ITransformer mlModel, string modelRelativePath, DataViewSchema modelInputSchema)
+        public static void SaveModel(MLContext mlContext, ITransformer mlModel, string modelRelativePath, DataViewSchema modelInputSchema)
         {
             // Save/persist the trained model to a .ZIP file
             Console.WriteLine($"=============== Saving the model  ===============");
-            mlContext.Model.Save(mlModel, modelInputSchema, GetAbsolutePath(modelRelativePath));
-            Console.WriteLine("The model is saved to {0}", GetAbsolutePath(modelRelativePath));
+            string path = GetAbsolutePath(modelRelativePath);
+            mlContext.Model.Save(mlModel, modelInputSchema, path);
+            Console.WriteLine("The model is saved to {0}", path);
         }
 
         public static string GetAbsolutePath(string relativePath)
