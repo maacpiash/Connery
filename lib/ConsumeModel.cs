@@ -19,8 +19,7 @@ namespace Connery.Lib
             MLContext mlContext = new MLContext();
 
             // Load model & create prediction engine
-            string modelPath = @"C:\Users\maacp\AppData\Local\Temp\MLVSTools\ConneryML\ConneryML.Model\MLModel.zip";
-            ITransformer mlModel = mlContext.Model.Load(modelPath, out var modelInputSchema);
+            ITransformer mlModel = mlContext.Model.Load(Paths.modelPath, out var modelInputSchema);
             var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 
             // Use model to make prediction on input data
