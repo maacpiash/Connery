@@ -19,8 +19,17 @@ namespace Connery.Training
             var dataProcessPipeline = mlContext.Transforms.Conversion.MapValueToKey("Label", "Label")
                                       .Append(mlContext.Transforms.LoadRawImageBytes("ImageSource_featurized", null, "ImageSource"))
                                       .Append(mlContext.Transforms.CopyColumns("Features", "ImageSource_featurized"));
+
             // Set the training algorithm 
-            var trainer = mlContext.MulticlassClassification.Trainers.ImageClassification(new ImageClassificationTrainer.Options() { LabelColumnName = "Label", FeatureColumnName = "Features" })
+            var options = new ImageClassificationTrainer.Options
+            {
+                LabelColumnName = "Label",
+                FeatureColumnName = "Features",
+                Arch = ImageClassificationTrainer.Architecture.InceptionV3,
+                MetricsCallback = Console.WriteLine,
+            };
+
+            var trainer = mlContext.MulticlassClassification.Trainers.ImageClassification(options)
                                       .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel", "PredictedLabel"));
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
