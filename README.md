@@ -44,6 +44,4 @@ Connery/
 
 ## Acknowledgement
 
-I followed the instruction described in official ML.NET documentation [here](https://docs.microsoft.com/en-us/dotnet/machine-learning/tutorials/image-classification-api-transfer-learning).
-
 This project was originally implemented as a course project during my CSE499 course at North South University over two semesters in 2018. I would like to thank my course supervisor, [Dr. Rashedur M. Rahman](http://ece.northsouth.edu/people/rashedur-rahman/).
