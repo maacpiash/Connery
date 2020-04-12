@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Connery.Web", "webapi\Connery.Web.csproj", "{BA4C53CA-4647-4335-883C-9FE8649210B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Connery.WebApi", "webapi\Connery.WebApi.csproj", "{BA4C53CA-4647-4335-883C-9FE8649210B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Connery.Lib", "lib\Connery.Lib.csproj", "{0511E46F-BA1B-4CF4-8BD3-6A03E8F1DEB5}"
 EndProject
