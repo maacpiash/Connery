@@ -12,14 +12,14 @@ namespace Connery.Lib
     {
         // For more info on consuming ML.NET models, visit https://aka.ms/model-builder-consume
         // Method for consuming model in your app
-        public static ModelOutput Predict(ModelInput input)
+        public static ModelOutput Predict(ModelInput input, string modelPath)
         {
 
             // Create new MLContext
             MLContext mlContext = new MLContext();
 
             // Load model & create prediction engine
-            ITransformer mlModel = mlContext.Model.Load(Paths.modelPath, out var modelInputSchema);
+            ITransformer mlModel = mlContext.Model.Load(modelPath, out var modelInputSchema);
             var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 
             // Use model to make prediction on input data

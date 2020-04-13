@@ -13,7 +13,7 @@ namespace Connery.Testing
             Console.WriteLine("Actual label\tPredicted Label\tScore");
             foreach (var image in images)
             {
-                var prediction = ConsumeModel.Predict(image);
+                var prediction = ConsumeModel.Predict(image, Paths.modelPath);
                 Console.WriteLine($"{image.Label}\t{prediction.Prediction}\t{prediction.Score.Max()}");
             }
         }
