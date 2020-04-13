@@ -8,6 +8,10 @@
     <ProjectReference Include="..\lib\Connery.Lib.csproj" />
     <Content Include="MLModel.zip" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
+  </ItemGroup>
   
 
 </Project>
