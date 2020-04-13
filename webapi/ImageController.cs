@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Connery.WebApi.Controllers
+namespace Connery.WebApi
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,9 +22,9 @@ namespace Connery.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<object> Post([FromBody]IFormFile image)
+        public async Task<object> Post([FromForm]IFormFile image)
         {
-            logger.LogInformation($"Request received at {new DateTime()}");
+            logger.LogInformation($"Request received at {DateTime.Now}");
             try
             {
                 var tempFilePath = Path.GetTempFileName();
@@ -32,9 +32,10 @@ namespace Connery.WebApi.Controllers
                 {
                     await image.CopyToAsync(ms);
                 }
-                var prediction = ConsumeModel.Predict(new ModelInput { ImageSource = tempFilePath, Label = "anything" });
-                logger.LogInformation($"Predicted {prediction.Prediction} with a probablity of {prediction.Score.Max()}");
-                return prediction;
+                ModelInput input = new ModelInput { ImageSource = tempFilePath };
+                ModelOutput output = ConsumeModel.Predict(input, "MLModel.zip");
+                logger.LogInformation($"Predicted {output.Prediction} with a probablity of {output.Score.Max()}");
+                return new Response(output);
             }
             catch (Exception e)
             {
