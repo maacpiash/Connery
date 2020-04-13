@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\lib\Connery.Lib.csproj" />
+    <Content Include="MLModel.zip" />
   </ItemGroup>
-
+  
 
 </Project>
