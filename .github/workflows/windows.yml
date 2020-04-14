@@ -1,0 +1,19 @@
+name: Windows
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Display dotnet info
+      run: dotnet --info
+    - name: Build all projects
+      run: dotnet build
