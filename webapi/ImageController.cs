@@ -7,6 +7,7 @@ using Connery.Lib;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Connery.WebApi
 {
@@ -15,10 +16,12 @@ namespace Connery.WebApi
     public class ImageController : ControllerBase
     {
         private readonly ILogger<ImageController> logger;
+        private readonly IWebHostEnvironment env;
 
-        public ImageController(ILogger<ImageController> logger)
+        public ImageController(ILogger<ImageController> logger, IWebHostEnvironment env)
         {
             this.logger = logger;
+            this.env = env;
         }
 
         [HttpPost]
@@ -41,7 +44,7 @@ namespace Connery.WebApi
                 }
 
                 ModelInput input = new ModelInput { ImageSource = tempFilePath };
-                ModelOutput output = ConsumeModel.Predict(input, "MLModel.zip");
+                ModelOutput output = ConsumeModel.Predict(input, Path.Combine(env.WebRootPath, "MLModel.zip"));
 
                 double probablity = output.Score.Max();
                 if (probablity == 0) // The file was probably not an image at all.

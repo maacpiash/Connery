@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\lib\Connery.Lib.csproj" />
-    <Content Include="MLModel.zip" />
   </ItemGroup>
 
   <ItemGroup>
