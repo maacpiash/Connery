@@ -19,7 +19,7 @@ namespace Connery.Training
         static void Main(string[] args)
         {
             // Load Data
-            IEnumerable<ModelInput> images = ModelInput.LoadImagesFromDirectory(Paths.assetsRelativePath);
+            IEnumerable<ModelInput> images = ModelInput.LoadImagesFromDirectory(Constants.AssetsRelativePath);
             IDataView trainingDataView = mlContext.Data.LoadFromEnumerable(images);
 
             // Build training pipeline
@@ -32,9 +32,9 @@ namespace Connery.Training
             ITransformer mlModel = TrainModel(mlContext, trainingDataView, trainingPipeline);
 
             // Save model
-            if (!Directory.Exists(Paths.workspaceRelativePath))
-                Directory.CreateDirectory(Paths.workspaceRelativePath);
-            SaveModel(mlContext, mlModel, Paths.modelPath, trainingDataView.Schema);
+            if (!Directory.Exists(Constants.WorkspaceRelativePath))
+                Directory.CreateDirectory(Constants.WorkspaceRelativePath);
+            SaveModel(mlContext, mlModel, Constants.ModelPath, trainingDataView.Schema);
 
             Console.WriteLine("Finished task. Press any key to exit.");
             Console.ReadKey();
