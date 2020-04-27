@@ -23,6 +23,7 @@ namespace Connery.Training
             // Set the training algorithm 
             var options = new ImageClassificationTrainer.Options
             {
+                WorkspacePath = Constants.WorkspaceRelativePath,
                 LabelColumnName = "Label",
                 FeatureColumnName = "Features",
                 Arch = ImageClassificationTrainer.Architecture.InceptionV3,
