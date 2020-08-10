@@ -11,6 +11,12 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\MLModel.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   
 
 </Project>
