@@ -39,7 +39,7 @@ namespace Connery.WebApi
                     Contact = new OpenApiContact
                     {
                         Name = "Mohammad Abdul Ahad Chowdhury",
-                        Email = "ahadc@maacpiash.com",
+                        Email = "ahad@maacpiash.com",
                         Url = new Uri("https://www.maacpiash.com"),
                     },
                     License = new OpenApiLicense
