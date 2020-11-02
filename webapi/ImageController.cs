@@ -43,9 +43,8 @@ namespace Connery.WebApi
                     logger.LogInformation($"{image.FileName} was saved to {tempFilePath}");
                 }
 
-                string modelDir = env.WebRootPath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot");
                 ModelInput input = new ModelInput { ImageSource = tempFilePath };
-                ModelOutput output = ConsumeModel.Predict(input, Path.Combine(modelDir, "MLModel.zip"));
+                ModelOutput output = ConsumeModel.Predict(input, Path.Combine(env.WebRootPath, "MLModel.zip"));
 
                 double probablity = output.Score.Max();
                 if (probablity == 0) // The file was probably not an image at all.
