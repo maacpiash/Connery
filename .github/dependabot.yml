@@ -1,0 +1,32 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "23:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Swashbuckle.AspNetCore
+    versions:
+    - 5.6.3
+    - 6.0.0
+    - 6.0.2
+    - 6.0.4
+    - 6.0.5
+    - 6.0.7
+    - 6.1.0
+    - 6.1.1
+    - 6.1.2
+  - dependency-name: Microsoft.ML.Vision
+    versions:
+    - 1.5.4
+  - dependency-name: Microsoft.ML.ImageAnalytics
+    versions:
+    - 1.5.4
+  - dependency-name: Microsoft.ML
+    versions:
+    - 1.5.4
+  - dependency-name: SciSharp.TensorFlow.Redist
+    versions:
+    - 2.4.0
