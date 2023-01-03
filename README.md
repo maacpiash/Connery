@@ -1,3 +1,5 @@
+## Connery API is offline due to Heroku ending free hosting. It will come back online soon. Thank you for checking out the repo.
+
 <h1 align="center">Connery</h1>
 
 <h3 align="center">
